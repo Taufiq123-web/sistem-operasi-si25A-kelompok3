@@ -14,7 +14,7 @@ Program Studi: Sistem Informasi, Universitas Galuh
 ## 🎯 Spesifikasi Lingkungan Server
 * **Hypervisor:** VMware Workstation Pro
 * **Sistem Operasi:** Debian 13 (Bookworm) - Headless (CLI / Tanpa GUI)
-* **IP Address VM (Guest):** `192.168.15.131` (Gunakan perintah `ip a` pada antarmuka ens33 untuk melihat IP VM Anda)
+* **IP Address VM (Guest):** `192.168.15.132` (Gunakan perintah `ip a` pada antarmuka ens33 untuk melihat IP VM Anda)
 * **Port Forwarding:** Host Port `8080` -> VM Port `80` (HTTP)
 
 ## 🛠️ Langkah-Langkah & Dokumentasi Praktikum
