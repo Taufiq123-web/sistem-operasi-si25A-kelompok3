@@ -1,15 +1,15 @@
 # sistem-operasi-si25A-kelompok3
- Tugas Instalasi Debian 13 Headless - Kelompok 3
+# Tugas Instalasi Debian 13 Headless - Kelompok 3
 # Laporan Tugas Kelompok: Instalasi Debian 13 Headless Web Server
 Mata Kuliah: Sistem Operasi (SI-25)
 Program Studi: Sistem Informasi, Universitas Galuh
 
 ## 👥 Anggota Kelompok 3 (Kelas SI-2025A)
-1. [Ahmad Nurrohman] - [7020250017]
-2. [Febi Muhammad Fauzi] - [7020250005]
-3. [Muhammad Taufiq] - [7020250009]
-4. [Rezanur Azizah] - [7020250003]
-5. [Alya Fauziah Haq] - [7020250002]
+1. Ahmad Nurrohman - 7020250017
+2. Febi Muhammad Fauzi - 7020250005
+3. Muhammad Taufiq - 7020250009
+4. Rezanur Azizah - 7020250003
+5. Alya Fauziah Haq - 7020250002
 
 ## 🎯 Spesifikasi Lingkungan Server
 * **Hypervisor:** VMware Workstation Pro
@@ -23,9 +23,11 @@ Program Studi: Sistem Informasi, Universitas Galuh
 * Melakukan instalasi sistem operasi Debian 13 mode teks dengan partisi guided (single partition).
 * Mengatur hostname: `server-SI2025A` dan memasang bootloader GRUB ke `/dev/sda`.
 * Memastikan hanya mencentang **SSH Server** dan **standard system utilities** pada tahap Software Selection.
-* ![Software Selection](images/01-software-selection.png)
+* Screenshot proses menu software selection di bawah ini
+  ![Software Selection](images/01-software-selection.png)
 
-* ![Login Terminal](images/02-debian-login.png)
+* Screenshot tampilan login terminal Debian pertama kali di bawah ini
+  ![Login Terminal](images/02-debian-login.png)
 
 ### 2. Konfigurasi User Sudo & Update Repositori
 * Masuk sebagai user `root`, menginstal paket `sudo`, dan menambahkan user biasa ke grup sudo.
@@ -36,8 +38,8 @@ Program Studi: Sistem Informasi, Universitas Galuh
   usermod -aG sudo [nama-user-kelompok]
   reboot
   ```
-* *[Tambahkan screenshot hasil uji coba perintah sudo oleh user biasa di bawah ini]*
-  ![Konfigurasi Sudo](images/02-sudo-config.png) *(Catatan: sesuaikan nama file dengan screenshot Anda)*
+* *Screenshot hasil uji coba perintah sudo oleh user biasa di bawah ini*
+  ![Konfigurasi Sudo](images/07-sudo-config.png) *(Catatan: sesuaikan nama file dengan screenshot Anda)*
 
 ### 3. Instalasi Web Server Nginx & Tools Dasar
 * Menginstal `net-tools`, `curl`, `git`, dan `nginx` menggunakan command line.
@@ -47,7 +49,7 @@ Program Studi: Sistem Informasi, Universitas Galuh
   sudo systemctl start nginx
   sudo systemctl enable nginx
   ```
-* *[Tambahkan screenshot status active running dari Nginx]*
+* *Screenshot status active running dari Nginx*
   ![Nginx Service Status](images/03-nginx-status.png)
 
 ### 4. Pembuatan Halaman Web Profil Kelompok
@@ -56,16 +58,16 @@ Program Studi: Sistem Informasi, Universitas Galuh
   ```bash
   sudo systemctl restart nginx
   ```
-* *[Tambahkan screenshot pengeditan index.html menggunakan nano editor]*
+* *Screenshot pengeditan index.html menggunakan nano editor*
   ![Edit index.html](images/04-edit-html.png)
 
 ### 5. Konfigurasi Port Forwarding VMware & Pengujian Host
 * Melakukan pemetaan port 8080 pada Windows Host ke port 80 Debian Guest VM lewat menu Virtual Network Editor.
 * Menguji akses web server Debian melalui browser di sistem operasi host.
-* *[Tambahkan screenshot pengaturan NAT Settings VMware]*
+* *Screenshot pengaturan NAT Settings VMware*
   ![NAT Settings VMware](images/05-nat-settings.png)
   
-* *[Tambahkan screenshot halaman profil kelompok yang berhasil diakses dari browser host di http://localhost:8080]*
+* *Screenshot halaman profil kelompok yang berhasil diakses dari browser host di http://localhost:8080*
   ![Akses Browser Host](images/06-browser-host.png)
 
 ## 🎥 Link Video Demo
