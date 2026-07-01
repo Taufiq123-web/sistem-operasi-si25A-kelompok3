@@ -5,9 +5,11 @@ Mata Kuliah: Sistem Operasi (SI-25)
 Program Studi: Sistem Informasi, Universitas Galuh
 
 ## 👥 Anggota Kelompok 3 (Kelas SI-2025A)
-1. [Nama Anggota 1] - [NIM 1]
-2. [Nama Anggota 2] - [NIM 2]
-3. [Nama Anggota 3] - [NIM 3]
+1. [Ahmad Nurrohman] - [7020250017]
+2. [Febi Muhammad Fauzi] - [7020250005]
+3. [Muhammad Taufiq] - [7020250009]
+4. [Rezanur Azizah] - [7020250003]
+5. [Alya Fauziah Haq] - [7020250002]
 
 ## 🎯 Spesifikasi Lingkungan Server
 * **Hypervisor:** VMware Workstation Pro
