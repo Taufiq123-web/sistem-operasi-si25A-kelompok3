@@ -71,7 +71,9 @@ Program Studi: Sistem Informasi, Universitas Galuh
   ![Akses Browser Host](images/06-browser-host.png)
 
 ## 🎥 Link Video Demo
-[Tonton Video Demo Pengerjaan Tugas Kelompok di YouTube / Google Drive](https://youtube.com/...)
+Tonton Video Demo Pengerjaan Tugas Kelompok 3 di YouTube / Google Drive
+(https://youtube.com/...)  
+(https://drive.google.com/drive/folders/1N328_OH-5UdNnGg3x8OQ_pglddKVPWPA)
 
 ## 📝 Kesimpulan
 Tuliskan simpulan dari praktikum yang telah dilakukan serta poin-poin penting yang didapatkan selama melakukan setup server Linux headless.
