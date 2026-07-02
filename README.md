@@ -211,8 +211,8 @@ Password dimasukkan 2 kali untuk verifikasi.
 Selain root, Debian meminta pembuatan user biasa.
 Contoh:
 ```
-Full Name : Muhammad Taufiq
-Username  : taufiq
+Full Name : Kelompok-3
+Username  : kelompok-3
 ```
 Kemudian membuat password user.
 
@@ -296,40 +296,768 @@ Screenshot proses menu software selection di bawah ini
   ![Login Terminal](images/02-debian-login.png)
 
 ### 2. Konfigurasi User Sudo & Update Repositori
-* Masuk sebagai user `root`, menginstal paket `sudo`, dan menambahkan user biasa ke grup sudo.
-* Menjalankan pembaruan paket sistem dengan perintah:
-  ```bash
-  apt update && apt upgrade -y
-  apt install sudo -y
-  usermod -aG sudo [nama-user-kelompok]
-  reboot
-  ```
+Pada tahap ini dilakukan beberapa proses penting setelah instalasi Debian selesai, yaitu:
+
+* Login sebagai *root*
+* Update sistem
+* Install paket *sudo*
+* Menambahkan user biasa ke grup *sudo*
+* Restart sistem
+* Menguji akses sudo menggunakan user biasa
+
+## Langkah 1.Login Sebagai Root
+
+Pada Debian headless, konfigurasi administrator biasanya dilakukan menggunakan akun *root*.
+
+Masuk ke terminal lalu login:
+```
+su -
+```
+Kemudian masukkan password root.
+
+Jika berhasil, tampilan terminal berubah menjadi:
+```
+root@debian:~#
+```
+
+**Fungsi Root**
+
+User ```root``` adalah administrator utama Linux yang memiliki hak penuh terhadap sistem, seperti:
+
+* menginstall aplikasi
+* menghapus file sistem
+* mengatur jaringan
+* mengelola user
+* melakukan update sistem
+
+Karena aksesnya sangat tinggi, penggunaan root secara langsung tidak disarankan untuk aktivitas sehari-hari.
+
+## Langkah 2. Update Paket Sistem
+
+Perintah yang digunakan:
+```
+apt update && apt upgrade -y
+```
+
+Penjelasan ```apt update```
+
+Perintah:
+```
+apt update
+```
+
+digunakan untuk:
+
+* mengambil daftar paket terbaru dari repositori Debian
+* memperbarui informasi package
+* mengecek versi terbaru aplikasi
+
+Contoh proses:
+```
+Get:1 http://deb.debian.org/debian bookworm InRelease
+Get:2 http://security.debian.org/debian-security InRelease
+Reading package lists... Done
+```
+
+Artinya Debian sedang mengambil data paket terbaru dari server repositori.
+
+Penjelasan ```apt upgrade -y```
+
+Setelah daftar paket diperbarui, dilakukan upgrade:
+```
+apt upgrade -y
+```
+
+Fungsi:
+
+* menginstall update terbaru
+* memperbarui keamanan sistem
+* memperbarui aplikasi bawaan
+
+Penjelasan opsi ```-y```
+
+```-y``` 
+berarti:
+```
+yes
+```
+Sistem otomatis menyetujui proses install tanpa harus mengetik ```Y``` secara manual.
+
+Fungsi Gabungan ```&&```
+
+Simbol:
+```
+&&
+```
+berfungsi menjalankan perintah kedua jika perintah pertama berhasil.
+
+Jadi:
+```
+apt update && apt upgrade -y
+```
+berarti:
+
+* update daftar paket
+* jika berhasil → lanjut upgrade sistem
+
+## Langkah 3. Install Paket sudo
+
+Perintah:
+```
+apt install sudo -y
+```
+
+**Fungsi sudo**
+
+```sudo``` adalah singkatan dari:
+```
+Super User Do
+```
+Digunakan agar user biasa dapat menjalankan perintah administrator tanpa login langsung sebagai root.
+
+Contoh:
+```
+sudo apt update
+```
+
+Penjelasan Perintah
+| Bagian	| Fungsi |
+|----------|------------|
+| apt	| package manager Debian |
+| install	| menginstall paket |
+| sudo	| nama paket |
+|-y	| otomatis menjawab yes |
+
+Contoh Output
+```
+Reading package lists... Done
+Building dependency tree... Done
+The following NEW packages will be installed:
+sudo
+```
+Artinya Debian akan menginstall paket sudo.
+
+## Langkah 4. Menambahkan User ke Grup sudo
+
+Perintah:
+```
+usermod -aG sudo [nama-user-kelompok]
+```
+Contoh:
+```
+usermod -aG sudo kelompok-3
+```
+
+Penjelasan Perintah
+| Bagian | Fungsi |
+|----------|------------|
+| usermod	| mengubah konfigurasi user |
+| -a	| append / menambahkan |
+| -G	| group |
+| sudo | grup administrator |
+| kelompok3	| nama user |
+
+**Fungsi Grup sudo**
+
+Di Debian, hanya user yang masuk ke grup sudo yang dapat menggunakan perintah sudo.
+
+Tanpa masuk grup tersebut, user akan mendapat pesan:
+```
+user is not in the sudoers file
+```
+
+## Langkah 5. Reboot Sistem
+
+Perintah:
+```
+reboot
+```
+
+**Fungsi Reboot**
+
+Digunakan untuk:
+
+* menerapkan perubahan grup user
+* menyegarkan sistem
+* memastikan konfigurasi berjalan normal
+
+Setelah reboot selesai:
+
+* login menggunakan user biasa
+* bukan root
+
+## Langkah 6. Uji Coba sudo oleh User Biasa
+
+Login menggunakan user yang tadi dimasukkan ke grup sudo.
+
+Contoh:
+```
+login: kelompok-3
+password:
+```
+Lalu jalankan:
+```
+sudo apt update
+```
+
+**Hasil yang Diharapkan**
+
+Sistem meminta password user:
+```
+[sudo] password for kelompok3:
+```
+Masukkan password user tersebut.
+
+Jika berhasil akan muncul proses update seperti:
+```
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Reading package lists... Done
+```
+Artinya user biasa berhasil menggunakan hak administrator melalui sudo.
+
+## Langkah 7. Alur Konfigurasi Secara Singkat
+```
+Login root
+↓
+Update sistem
+↓
+Install sudo
+↓
+Tambahkan user ke grup sudo
+↓
+Reboot
+↓
+Login user biasa
+↓
+Uji sudo
+```
 * *Screenshot hasil uji coba perintah sudo oleh user biasa di bawah ini*
   ![Konfigurasi Sudo](images/07-sudo-config.png) *(Catatan: sesuaikan nama file dengan screenshot Anda)*
 
 ### 3. Instalasi Web Server Nginx & Tools Dasar
-* Menginstal `net-tools`, `curl`, `git`, dan `nginx` menggunakan command line.
-* Menjalankan dan mengaktifkan service Nginx agar berjalan otomatis saat booting.
-  ```bash
-  sudo apt install net-tools curl git nginx -y
-  sudo systemctl start nginx
-  sudo systemctl enable nginx
-  ```
+Pada tahap ini dilakukan instalasi beberapa tools penting dan web server Nginx menggunakan command line pada sistem Debian headless.
+
+Tools yang diinstall:
+
+* net-tools
+* curl
+* git
+* nginx
+
+Kemudian:
+
+* menjalankan service Nginx
+* mengaktifkan Nginx agar otomatis berjalan saat booting
+
+## Langkah 1. Pengertian Tools yang Diinstall
+
+ A. net-tools
+
+```net-tools``` adalah paket utilitas jaringan Linux yang berisi beberapa perintah penting seperti:
+
+| Perintah	| Fungsi |
+|----------|------------|
+| ifconfig	| melihat IP address |
+| netstat	| melihat koneksi jaringan |
+| route	| melihat routing |
+| arp	| melihat ARP table |
+
+Contoh penggunaan:
+```
+ifconfig
+```
+Untuk melihat alamat IP server.
+
+ B. curl
+
+```curl``` digunakan untuk:
+
+* mengambil data dari internet
+* menguji koneksi server
+* mengakses API
+* download file dari terminal
+
+Contoh:
+```
+curl google.com
+```
+
+C. git
+
+```git``` adalah sistem version control yang digunakan untuk:
+
+* menyimpan versi project
+* clone repository GitHub
+* kolaborasi coding
+
+Contoh:
+```
+git clone https://github.com/user/project.git
+```
+
+ D. nginx
+
+Nginx adalah web server yang digunakan untuk:
+
+* menjalankan website
+* reverse proxy
+* load balancing
+* hosting aplikasi web
+
+Nginx terkenal:
+
+* ringan
+* cepat
+* stabil
+* hemat resource
+
+## Langkah 2. Instalasi Paket
+
+Perintah yang digunakan:
+```
+sudo apt install net-tools curl git nginx -y
+```
+
+## Langkah 3. Penjelasan Perintah Instalasi
+
+| Bagian	| Fungsi |
+|----------|------------|
+| sudo	| menjalankan perintah sebagai administrator |
+| apt	| package manager Debian |
+| install	| menginstall paket |
+| net-tools curl git nginx	| nama paket yang diinstall |
+| -y	| otomatis menjawab yes |
+
+## langkah 4. Proses yang Terjadi Saat Instalasi
+
+Ketika perintah dijalankan, Debian akan:
+
+* membaca daftar paket
+* mengecek dependency
+* mendownload package
+* menginstall package
+* membuat konfigurasi awal
+
+Contoh Output
+```
+Reading package lists... Done
+Building dependency tree... Done
+The following NEW packages will be installed:
+curl git nginx net-tools
+```
+Artinya sistem akan menginstall paket tersebut.
+
+## Langkah 5. Menjalankan Service Nginx
+
+Perintah:
+```
+sudo systemctl start nginx
+```
+
+## Langkah 6. Penjelasan systemctl
+
+```systemctl``` adalah tool untuk mengatur service pada Linux systemd.
+
+Digunakan untuk:
+
+* start service
+* stop service
+* restart service
+* cek status service
+
+## Langkah 7. Penjelasan Perintah Start
+
+| Bagian	| Fungsi |
+|----------|------------|
+| sudo	| hak administrator |
+| systemctl	| pengatur service |
+| start	| menjalankan service |
+| nginx	| nama service |
+
+## Langkah 8. Fungsi Menjalankan Nginx
+
+Saat service dijalankan:
+
+* web server aktif
+* port 80 dibuka
+* website default Nginx bisa diakses
+
+## Langkah 9. Mengecek Status Nginx
+
+Gunakan:
+```
+sudo systemctl status nginx
+```
+Jika berhasil:
+```
+active (running)
+```
+Artinya Nginx sedang berjalan.
+
+## Langkah 10. Mengaktifkan Nginx Saat Booting
+
+Perintah:
+```
+sudo systemctl enable nginx
+```
+
+## Langkah 11. Fungsi Enable
+
+```enable``` digunakan agar service:
+
+* otomatis aktif saat komputer/server hidup
+* tidak perlu dijalankan manual lagi
+
+Penjelasan
+| Bagian	| Fungsi |
+|----------|------------|
+| systemctl	| pengatur service |
+| enable	| aktif otomatis saat boot |
+| nginx	| nama service |
+
+## Langkah 12. Contoh Output Enable
+```
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service
+```
+Artinya service berhasil diaktifkan saat boot.
+
+## Langkah 13. Menguji Apakah Nginx Berjalan
+A. Menggunakan Browser
+
+Buka:
+```
+http://IP-Server
+```
+Contoh:
+````
+http://192.168.15.132
+````
+Jika berhasil muncul halaman:
+```
+Welcome to nginx!
+```
+B. Menggunakan curl
+
+Dari terminal:
+```
+curl localhost
+```
+Atau:
+```
+curl 127.0.0.1
+```
+Jika berhasil akan muncul kode HTML halaman Nginx.
+
+## Langkah 14. Mengecek Port Nginx
+
+Gunakan:
+```
+sudo netstat -tulpn
+```
+Atau:
+```
+ss -tulpn
+```
+Hasil:
+```
+tcp LISTEN 0 511 0.0.0.0:80
+```
+Artinya Nginx berjalan di port 80.
+
+## Langkah 15. Lokasi File Penting Nginx
+| Lokasi	| Fungsi |
+|----------|------------|
+| /etc/nginx/nginx.conf	| konfigurasi utama |
+| /etc/nginx/sites-available	| konfigurasi website |
+| /var/www/html	| folder website |
+| /var/log/nginx	| log nginx |
+
+## Langkah 16. Perintah Penting Nginx
+Start
+```
+sudo systemctl start nginx
+```
+Stop
+```
+sudo systemctl stop nginx
+```
+Restart
+```
+sudo systemctl restart nginx
+````
+Reload
+```
+sudo systemctl reload nginx
+```
+Status
+```
+sudo systemctl status nginx
+```
+
+## Langkah 17. Alur Instalasi Nginx
+```
+Install package
+↓
+Nginx terpasang
+↓
+Start nginx
+↓
+Port 80 aktif
+↓
+Enable nginx
+↓
+Otomatis berjalan saat boot
+```
+
+## Langkah 18. Screenshot yang Biasanya Dibutuhkan
+A. Install package
+```
+sudo apt install net-tools curl git nginx -y
+```
+B. Menjalankan nginx
+```
+sudo systemctl start nginx
+```
+C. Enable nginx
+```
+sudo systemctl enable nginx
+```
+D. Status nginx
+```
+sudo systemctl status nginx
+```
 * *Screenshot status active running dari Nginx*
   ![Nginx Service Status](images/03-nginx-status.png)
 
 ### 4. Pembuatan Halaman Web Profil Kelompok
-* Mengubah dokumen default Nginx pada `/var/www/html/index.html` dengan HTML profil anggota kelompok Anda.
-* Melakukan restart web server untuk memuat perubahan.
-  ```bash
-  sudo systemctl restart nginx
-  ```
+Pada tahap ini dilakukan pembuatan halaman website sederhana menggunakan HTML yang berisi profil anggota kelompok. File halaman web disimpan pada direktori default Nginx yaitu:
+```
+/var/www/html/index.html
+```
+Setelah file diubah, service Nginx direstart agar perubahan dapat dimuat dan ditampilkan pada browser.
+
+## Langkah 1. Pengertian Halaman Web Profil Kelompok
+
+Halaman web profil kelompok adalah halaman website sederhana yang berisi informasi seperti:
+
+* nama kelompok
+* anggota kelompok
+* NIM
+* Motto
+
+Website ini digunakan sebagai:
+
+* latihan dasar web server
+* pengujian Nginx
+* pembelajaran HTML dasar
+* bukti bahwa server berhasil menjalankan website
+
+## Langkah 2. Struktur Dasar Web Server Nginx
+
+Pada Debian, Nginx secara default menyimpan file website di:
+```
+/var/www/html
+```
+Folder ini disebut:
+
+**Document Root**
+
+Artinya:
+
+* semua file website dibaca dari folder tersebut
+* file HTML di dalam folder dapat diakses melalui browser
+
+## Langkah 3. File Default Nginx
+
+Saat Nginx pertama kali diinstall, terdapat file bawaan:
+```
+/var/www/html/index.html
+```
+Isi file tersebut adalah halaman default:
+```
+Welcome to nginx!
+```
+File inilah yang akan diganti dengan halaman profil kelompok.
+
+## Langkh 4. Membuka File index.html
+
+Gunakan text editor terminal seperti nano.
+
+Perintah:
+```
+sudo nano /var/www/html/index.html
+```
+
+## Langkah 5. Penjelasan Perintah
+| Bagian	| Fungsi |
+|----------|------------|
+| sudo	| menjalankan sebagai administrator |
+| nano	| text editor terminal |
+| /var/www/html/index.html	| lokasi file website |
+
+## Langkah 6. Menghapus Isi Default
+
+Setelah file terbuka:
+
+* hapus seluruh isi halaman default nginx
+* ganti dengan kode HTML profil kelompok
+
+## Langkah 7. Contoh HTML Profil Kelompok
+
+Contoh sederhana:
+```
+<!DOCTYPE html>
+<html>
+    <head><title>Profil Kelompok 3</title></head>
+    <body>
+        <h1>Server Debian 13 Kelompok 3</h1>
+        <p>Anggota      :</p>
+            <p>-Ahmad Nurrohman</p>
+            <p>-Febi Muhamad Fauzi</p>
+            <p>-Muhammad Taufiq</p> 
+            <p>-Alya Fauziah Haq</p>
+            <p>-Rezanur Azizah </p>
+            <p>Motto    :"Tetap Hidup untuk Masa Depan"</p>
+</body>
+</html>
+```
+
+## Langkah 8. Penjelasan Struktur HTML
+A. ```<!DOCTYPE html>```
+
+Menentukan bahwa dokumen menggunakan HTML5.
+
+B. ```<html>```
+
+Tag utama pembungkus halaman HTML.
+
+C. ```<head>```
+
+Berisi informasi halaman seperti:
+
+* title
+* metadata
+* CSS
+
+D. ```<title>```
+
+Judul tab browser.
+
+Contoh:
+```
+<title>Profil Kelompok 3</title>
+```
+
+E. ```<body>```
+
+Bagian utama isi website.
+
+F. ```<h1>```
+
+Heading/judul besar.
+
+G. ```<ul>``` dan ```<li>```
+
+Digunakan membuat daftar anggota kelompok.
+
+H. ```<p>```
+
+Paragraf penjelasan.
+
+## Langkah 9. Menyimpan File pada Nano
+
+Setelah selesai:
+
+* tekan CTRL + O
+* tekan Enter
+* tekan CTRL + X
+
+Untuk keluar dari nano.
+
+10. Restart Service Nginx
+
+Perintah:
+```
+sudo systemctl restart nginx
+```
+
+## Langkah 11. Fungsi Restart Nginx
+
+Restart digunakan untuk:
+
+* memuat ulang perubahan website
+* membaca ulang konfigurasi
+* memperbarui service web server
+
+Tanpa restart, terkadang perubahan belum langsung terbaca.
+
+## langkah 12. Penjelasan Perintah Restart
+| Bagian	| Fungsi |
+|----------|------------|
+| sudo	| hak administrator |
+| systemctl	| pengelola service Linux |
+| restart	| memulai ulang service |
+| nginx	| nama service |
+
+## Langkah13. Menguji Website
+A. Menggunakan Browser
+
+Buka browser lalu akses:
+```
+http://localhost
+```
+Contoh:
+```
+http://localhost8080
+```
+Jika berhasil maka halaman profil kelompok akan tampil.
+
+## Langkah 14. Mengecek IP Server
+
+Gunakan:
+```
+ip a
+```
+Atau:
+```
+ifconfig
+```
+Cari alamat:
+```
+inet 192.168.x.x
+```
+
+## Langkah 15. Alur Kerja Pembuatan Website
+```
+Edit file index.html
+↓
+Simpan perubahan
+↓
+Restart nginx
+↓
+Akses IP server
+↓
+Halaman profil tampil
+```
+
+## Langkah 16. Struktur Direktori Website
+```
+/var/www/html
+│
+├── index.html
+```
+
+## Langkah 17. Fungsi Nginx dalam Hal Ini
+
+Nginx bertugas:
+
+* membaca file HTML
+* mengirim halaman ke browser client
+* membuka akses web melalui port 80
 * *Screenshot pengeditan index.html menggunakan nano editor*
   ![Edit index.html](images/04-edit-html.png)
 
-### 5. Konfigurasi Port Forwarding VMware & Pengujian Host
-* Melakukan pemetaan port 8080 pada Windows Host ke port 80 Debian Guest VM lewat menu Virtual Network Editor.
-* Menguji akses web server Debian melalui browser di sistem operasi host.
+
 * *Screenshot pengaturan NAT Settings VMware*
   ![NAT Settings VMware](images/05-nat-settings.png)
   
