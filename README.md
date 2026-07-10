@@ -1068,6 +1068,10 @@ Nginx bertugas:
 Tonton Video Demo Pengerjaan Tugas Kelompok 3 di YouTube / Google Drive
 (https://drive.google.com/drive/folders/1N328_OH-5UdNnGg3x8OQ_pglddKVPWPA)
 
+## 📑 Link Laporan Praktikum
+Laporan praktikum Tugas Kelompok 3 yang berisi dokumentasi, langkah-langkah pengerjaan, konfigurasi, hasil implementasi, serta pembahasan dapat diakses melalui tautan berikut.
+(https://drive.google.com/file/d/1bpsW00F18ld-bluB4dHC6ENZ3lH2-VNE/view?usp=drivesdk)
+
 ## 📝 Kesimpulan
 Melalui praktikum ini, kami memperoleh pengalaman langsung dalam membangun dan mengelola server Linux menggunakan Debian 13. Selama proses pengerjaan, kami menjadi lebih memahami tahapan pembuatan Virtual Machine, instalasi sistem operasi Debian dalam mode teks (headless), pemasangan aplikasi pendukung jaringan, konfigurasi web server Nginx, hingga pengaturan Port Forwarding agar server dapat diakses dari komputer host.
 Praktikum ini juga menegaskan bahwa setiap langkah konfigurasi harus dilakukan dengan teliti, karena kesalahan kecil dapat menyebabkan sistem atau layanan tidak berjalan sebagaimana mestinya. Selain menambah pemahaman mengenai administrasi server Linux, kegiatan ini melatih kemampuan kami untuk bekerja sama, berdiskusi, dan menyelesaikan permasalahan yang muncul selama praktikum.
